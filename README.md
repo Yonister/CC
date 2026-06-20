@@ -4,12 +4,10 @@
 
 ## 🎮 เล่นเกม
 
-เล่นออนไลน์ได้ที่: `[https://<your-username>.github.io/<repo-name>/](https://yonister.github.io/CC/)`
-(ลิงก์จะอัปเดตหลัง deploy ผ่าน GitHub Pages)
-
+เล่นออนไลน์ได้ที่: https://yonister.github.io/CC/
 ## ✨ Features
 
-- 4 Class: Warrior, Mage, Rogue, Paladin — แต่ละอาชีพมีการ์ดและ Skill Tree เฉพาะตัว
+- 4 Class: Warrior, Mage, Rogue, Pala in — แต่ละอาชีพมีการ์ดและ Skill Tree เฉพาะตัว
 - Skill Tree ปรับระดับได้ Lv1-5 ต่อ skill
 - ระบบ Fusion ผสมการ์ด 2 ใบเป็นใบใหม่ที่แรงขึ้น (ทำได้ที่จุดพัก)
 - ระบบธาตุ (Fire/Ice/Lightning/Physical) มีจุดอ่อนของศัตรู
