@@ -4,7 +4,7 @@
 
 ## 🎮 เล่นเกม
 
-เล่นออนไลน์ได้ที่: `https://<your-username>.github.io/<repo-name>/`
+เล่นออนไลน์ได้ที่: `[https://<your-username>.github.io/<repo-name>/](https://yonister.github.io/CC/)`
 (ลิงก์จะอัปเดตหลัง deploy ผ่าน GitHub Pages)
 
 ## ✨ Features
