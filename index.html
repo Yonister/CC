@@ -732,7 +732,7 @@ const DB=[
   {id:'mriff',name:'Riff',type:'attack',cost:1,rarity:'u',desc:'5 ดมจ⚔️ ×2',damage:5,hits:2,element:'physical',songNote:true},
   {id:'mguard2',name:'Steady Beat',type:'defense',cost:1,rarity:'u',desc:'4 ดมจ🧊 + 7 บล็อก',damage:4,block:7,element:'ice',songNote:true},
   {id:'mskillnote',name:'Quick Verse',type:'attack',cost:0,rarity:'u',desc:'3 ดมจ⚔️ + มานา+1',damage:3,manaAdd:1,element:'physical',songNote:true},
-  {id:'mcointoss',name:'Coin Toss',type:'attack',cost:0,rarity:'u',desc:'25 ดมจ ทะลุเกราะ',damage:25,piercing:true,goldCost:20,element:'physical'},
+  {id:'mcointoss',name:'Coin Toss',type:'attack',cost:0,rarity:'u',desc:'35 ดมจ ทะลุเกราะ',damage:35,piercing:true,goldCost:20,element:'physical'},
   {id:'mbribe',name:'Bribe',type:'defense',cost:1,rarity:'u',desc:'+20 บล็อก',block:20,goldCost:15},
   {id:'mpickpocket',name:'Pickpocket',type:'attack',cost:1,rarity:'u',desc:'5 ดมจ ×2 ถ้าทะลุบล็อกได้ Gold 5',damage:5,hits:2,sp:'pickpocket',element:'physical'},
   {id:'minvestment',name:'Investment',type:'buff',cost:2,rarity:'u',desc:'+10 บล็อก + จบศึกได้ Gold โบนัส 30%',block:10,sp:'investment'},
@@ -1046,12 +1046,12 @@ function activateUlt(){
   if(cls==='merchant'){
     if(G.gold>=50){
       G.gold-=50;
-      doDmg(60,1,true,'ทุนสะท้าน 💰',(e.weakness||'physical'));
+      doDmg(90,1,true,'ทุนสะท้าน 💰',(e.weakness||'physical'));
       const gsword=DB.find(x=>x.id==='mgoldsword');
       if(gsword){b.hand.push({...gsword});log('ทุนสะท้าน: ได้ Gold Sword ฟรี 1 ใบ','stat');}
-      log('ทุนสะท้าน: จ่าย 50💰 → ดีล 60 ทะลุ','combo');
+      log('ทุนสะท้าน: จ่าย 50💰 → ดีล 90 ทะลุ','combo');
     }else{
-      doDmg(30,1,true,'ทุนสะท้าน (ทองไม่พอ) 💰',(e.weakness||'physical'));
+      doDmg(45,1,true,'ทุนสะท้าน (ทองไม่พอ) 💰',(e.weakness||'physical'));
       log('ทุนสะท้าน: ทองไม่พอ 50 → ดีลครึ่งเดียว','stat');
     }
   }
@@ -1109,20 +1109,24 @@ function resolveSong(song, sameTurn){
   const b=G.battle;
   const e=b.e;
   let powerMult = sameTurn ? 1 : 0.7;
-  // Crescendo Master: เพลงที่ 2+ ในเทิร์นเดียวกัน แรงขึ้น
   if(b._comboTurn!==b.turnCount){ b._comboTurn=b.turnCount; b._combosThisTurn=0; }
   b._combosThisTurn++;
   let crescTag='';
+  
+  // จำกัดตัวคูณ Crescendo Master ไว้ที่ 3 สแตค เพื่อไม่ให้ดาเมจพุ่งเกินขอบเขต
   if(hasRelic('crescendoMaster') && b._combosThisTurn>=2){
-    const cresc=0.2*hasRelic('crescendoMaster')*(b._combosThisTurn-1);
-    powerMult*=1+cresc;
-    crescTag=` 🎶x${b._combosThisTurn}`;
+    const cappedCombo = Math.min(3, b._combosThisTurn - 1);
+    const cresc = 0.2 * hasRelic('crescendoMaster') * cappedCombo;
+    powerMult *= 1 + cresc;
+    crescTag = ` 🎶x${b._combosThisTurn}`;
   }
+  
   const tag = sameTurn ? '' : ' (ข้ามเทิร์น 70%)';
   log(`🎵 ${song.icon} ${song.name}!${tag}${crescTag} ${song.desc}`,'combo');
   toast(`🎵 ${song.name}!${sameTurn?'':' (70%)'}${crescTag}`);
   sfx('weak');
   const pitchMult=(hasRelic('perfectPitch')?1+0.12*hasRelic('perfectPitch'):1)*powerMult;
+  
   if(song.sp==='song_march'){
     const bonus=hasRelic('bassdrop')?5*hasRelic('bassdrop'):0;
     doDmg(Math.floor((16+bonus)*pitchMult),1,true,song.name,'fire');
@@ -1132,7 +1136,7 @@ function resolveSong(song, sameTurn){
     doDmg(Math.floor(10*pitchMult),3,false,song.name,'lightning');
   }
   if(song.sp==='song_crescendo'){
-    b.mana+=2;draw(2);
+    b.mana+=2; draw(1); // ลดการจั่วของ Crescendo เหลือ 1 ใบ
   }
   if(song.sp==='song_lullaby'){
     const blockBonus=hasRelic('soothingMelody')?5*hasRelic('soothingMelody'):0;
@@ -1171,7 +1175,16 @@ function resolveSong(song, sameTurn){
     doHeal(Math.floor(8*powerMult),song.name);
   }
   if(hasRelic('resonance')){doHeal(2*hasRelic('resonance'),'Resonance');}
-  if(hasRelic('encore')){draw(hasRelic('encore'));}
+  
+  // จำกัดการจั่วของการ์ด Encore ให้ทำงานได้มากสุด 2 ครั้งต่อเทิร์น
+  if(hasRelic('encore')){
+    b._encoreDrawCount = (b._encoreDrawCount || 0) + 1;
+    if(b._encoreDrawCount <= 2) {
+      draw(1);
+    }
+    doHeal(2 * hasRelic('encore'), 'Encore');
+  }
+  
   b._songComboCount=(b._songComboCount||0)+1;
   musicianUltCombo();
   if(hasRelic('finale')&&b._songComboCount>=3&&!b._finaleTriggered){
@@ -1386,7 +1399,7 @@ const SKILL_TREES={
     ]},
     virtuoso:{label:'🥁 Virtuoso',skills:[
       {id:'mu_v1',name:'Fast Fingers',desc:'การ์ดโน้ตใบแรกของเทิร์น คืนมานา 1/lv',passive:'noteRefund',cost:1},
-      {id:'mu_v2',name:'Encore',desc:'คอมโบสำเร็จ จั่ว 1/lv + ฟื้น 2 HP/lv',passive:'encore',cost:2},
+      {id:'mu_v2',name:'Encore',desc:'คอมโบสำเร็จ จั่ว 1 ใบ (สูงสุด 2 ครั้ง/เทิร์น) + ฟื้น 2 HP/lv',passive:'encore',cost:2},
       {id:'mu_v3',name:'Maestro Vigor',desc:'HP สูงสุด+20/lv + เริ่มศึกมีบล็อก 5/lv',passive:'museHp',cost:2},
     ]},
   },
@@ -1845,7 +1858,7 @@ function startBattle(isElite=false,isBoss=false){
   if(isBoss){
     const b=BOSSES[Math.min(bossIdx,BOSSES.length-1)];
     const overflow=Math.max(0,bossIdx-(BOSSES.length-1));
-    const bossMult=overflow>0?(1+overflow*0.35):1;
+    const bossMult=overflow>0?(1+overflow*0.50):1; // บัฟบอสวนลูปให้เก่งขึ้น 50%
     const bHp=Math.floor(b.hp*bossMult);
     const bAtk=Math.floor(b.atk*bossMult);
     e={...b,hp:bHp,maxHp:bHp,atk:bAtk,block:0,poison:0,burn:0,slowed:false,patIdx:0,armor:b.armor||0,gold:b.gold,hp2:false};
@@ -1854,8 +1867,8 @@ function startBattle(isElite=false,isBoss=false){
     e._ultDmgMult=2.4;
   } else if(isElite){
     const et=ELITES[Math.floor(Math.random()*ELITES.length)];
-    const hp=Math.floor(et.bHp*(1+(G.floor-1)*0.14));
-    const atk=Math.floor(et.bAtk*(1+(G.floor-1)*0.11));
+    const hp=Math.floor(et.bHp*(1+(G.floor-1)*0.18)); // บัฟเลือด Elite ช่วงท้าย
+    const atk=Math.floor(et.bAtk*(1+(G.floor-1)*0.14)); // บัฟดาเมจ Elite ช่วงท้าย
     e={...et,hp,maxHp:hp,atk,block:0,poison:0,burn:0,slowed:false,patIdx:0,armor:et.armor||0,gold:et.gold,hp2:false};
   } else {
     const depthInAct=G._pendingNode?G._pendingNode.f:((G.floor-1)%ACT_FLOORS);
@@ -1868,7 +1881,7 @@ function startBattle(isElite=false,isBoss=false){
     const t=ETYPES[Math.min(pick,ETYPES.length-1)];
     const f=G.floor-1;
     const hp=Math.floor(t.bHp*(1+f*0.16));
-    const atkScale=f<=15?(1+f*0.13):(1+15*0.13+(f-15)*0.06);
+    const atkScale=f<=15?(1+f*0.13):(1+15*0.13+(f-15)*0.11); // บัฟมอนสเตอร์ธรรมดาหลังชั้น 15
     const atk=Math.floor(t.bAtk*atkScale);
     e={...t,hp,maxHp:hp,atk,block:0,poison:0,burn:0,slowed:false,patIdx:0,armor:0,gold:t.gold,hp2:false};
   }
@@ -1898,9 +1911,9 @@ function startBattle(isElite=false,isBoss=false){
     log(`✨ Divine Shield: เริ่มด้วยป้องกันถาวร ${G.battle.permDef}`, 'blk');
   }
   if(hasRelic('capitalism')){
-    const capBonus=Math.min(30,Math.floor(G.gold/20)*hasRelic('capitalism'));
+    const capBonus=Math.min(50,Math.floor(G.gold/20)*hasRelic('capitalism')); // ขยับเพดานโจมตีจาก 30 เป็น 50
     G.battle.atkBuff+=capBonus;
-    if(capBonus>0)log(`💰 Capitalism: มีทอง ${G.gold} → โจมตี+${capBonus}${capBonus>=30?' (สูงสุด)':''}`,'stat');
+    if(capBonus>0)log(`💰 Capitalism: มีทอง ${G.gold} → โจมตี+${capBonus}${capBonus>=50?' (สูงสุด)':''}`,'stat');
   }
   if(hasRelic('firstTurnAtk'))G.battle.atkBuff+=4*hasRelic('firstTurnAtk');
   if(hasRelic('improvise')){
@@ -2302,7 +2315,9 @@ async function endTurn(){
   if(b.nextManaDrain){b.mana=Math.max(0,b.mana-2);b.nextManaDrain=false;log('🌌 มานาถูกดูด -2!','stat');}
   b.recent=[]; 
   b._ultPaladinShield=false;b._ultRogueFree=false;
-  b.dmgTakenThisTurn=0;b.cardsPlayedThisTurn=0;b._noteRefundUsed=false;b._transposeUsed=false;
+  // รีเซ็ตตัวนับการจั่วของการ์ด Encore เพื่อเริ่มนับใหม่เทิร์นหน้า
+  b.dmgTakenThisTurn=0;b.cardsPlayedThisTurn=0;b._noteRefundUsed=false;b._transposeUsed=false;b._encoreDrawCount=0;
+  
   if(b.playerBurn>0)b.playerBurn=Math.max(0,b.playerBurn-1);
   if(b.e.vulnTurns>0)b.e.vulnTurns--;if(b.e.weakTurns>0)b.e.weakTurns--;
   if(b.extraTurn>0){b.extraTurn--;toast('🔄 เทิร์นพิเศษ!');log('เทิร์นพิเศษ!','combo');}
