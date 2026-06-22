@@ -103,6 +103,8 @@ body{background:#0d0d1f;color:#e0d4ff;font-family:'Segoe UI',sans-serif;min-heig
 .mn-boss{background:#1e0000;border-color:#ff2222;color:#ff4444}
 .mn-treasure{background:#1a1400;border-color:#ffd700;color:#ffd700}
 .mn-rest{background:#0a0a2a;border-color:#4488ff;color:#88aaff}
+.map-node{position:relative}
+.fuse-node-badge{position:absolute;top:-7px;right:-7px;background:#ffd700;color:#1a0800;border-radius:9px;padding:0 5px;font-size:.62em;font-weight:700;border:1.5px solid #1a0800;box-shadow:0 1px 3px rgba(0,0,0,.5);animation:fusepulse 1.1s ease-in-out infinite alternate}
 .amap-node{width:42px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid;font-size:1.1em;transform:translate(-50%,-50%);z-index:2;transition:transform .1s,box-shadow .2s;touch-action:manipulation}
 .amap-node:active{transform:translate(-50%,-50%) scale(.9)}
 .amap-node.amap-locked{opacity:.3;cursor:default;filter:grayscale(.6);pointer-events:none}
@@ -330,14 +332,17 @@ body{background:#0d0d1f;color:#e0d4ff;font-family:'Segoe UI',sans-serif;min-heig
   <div class="modal-box" style="max-width:560px">
     <h3>📖 วิธีเล่น</h3>
     <div style="max-height:65vh;overflow-y:auto;padding-right:4px;text-align:left;font-size:.82em;line-height:1.6;color:#c8b8e8">
-      <p><b style="color:#ffd700">🎯 เป้าหมาย</b><br>ไต่หอคอยให้สูงที่สุด สู้มอนสเตอร์ทีละชั้น เก็บการ์ด/Relic ให้แกร่งขึ้นเรื่อยๆ</p>
-      <p><b style="color:#88ff88">⚔️ การต่อสู้</b><br>เล่นการ์ดโดยใช้ 💎 มานา (รีเซ็ตทุกเทิร์น) — การ์ดโจมตี ป้องกัน เวทย์ บัฟ จบเทิร์นแล้วการ์ดในมือจะถูกทิ้ง แล้วจั่วใหม่</p>
-      <p><b style="color:#ff8888">👹 อ่าน Intent ศัตรู</b><br>แถบบนบอกล่วงหน้าว่าศัตรูจะทำอะไร 4 เทิร์น — สีแดง 💀 = ตีตายถ้าไม่ตั้งรับ, สีม่วง 💥 = บอสกำลังชาร์จท่าไม้ตาย!</p>
+      <p style="background:#1a1430;border:1px solid #6644aa;border-radius:8px;padding:8px"><b style="color:#dd88ff">👋 เล่นครั้งแรก?</b><br>Card Tower เป็นเกมไพ่ roguelike — ไต่หอคอย สู้ทีละชั้น สร้างสำรับให้แกร่งขึ้น ตายแล้วเริ่มใหม่ อ่าน 3 ข้อแรกก็พอเริ่มเล่นได้เลย!</p>
+      <p><b style="color:#ffd700">1️⃣ เป้าหมาย</b><br>ไต่หอคอยให้สูงที่สุด สู้มอนสเตอร์ทีละชั้น เก็บการ์ด/Relic ให้แกร่งขึ้นเรื่อยๆ จนถึงบอสชั้น 10</p>
+      <p><b style="color:#88ff88">2️⃣ การต่อสู้</b><br>เล่นการ์ดโดยใช้ 💎 มานา (รีเซ็ตทุกเทิร์น) — มีการ์ดโจมตี ป้องกัน เวทย์ บัฟ จบเทิร์นแล้วการ์ดในมือถูกทิ้ง จั่วใหม่ 5 ใบ</p>
+      <p><b style="color:#ff8888">3️⃣ อ่าน Intent ศัตรู</b><br>แถบบนหัวศัตรูบอกล่วงหน้าว่าจะทำอะไร — สีแดง 💀 = ตีแรงต้องตั้งรับ, สีม่วง 💥 = บอสกำลังชาร์จท่าไม้ตาย!</p>
       <p><b style="color:#44ff44">🔥 จุดอ่อนธาตุ</b><br>การ์ดที่ขอบเรืองแสงเขียว 💥 คือธาตุตรงจุดอ่อนศัตรู ดีลเพิ่ม 50%</p>
-      <p><b style="color:#2a2">⭐ Skill Tree</b><br>เก็บ Skill Point จากการสู้/event มาอัพสกิลเฉพาะสายของ Class (กดไอคอน ⭐ บน map)</p>
+      <p><b style="color:#ffb84d">⚡ Ultimate</b><br>แต่ละ Class มีเกจ Ultimate ใต้แถบมานา สะสมเต็มแล้วกดปุ่ม ⚡ ปล่อยท่าไม้ตายประจำอาชีพ (ใช้ซ้ำได้ทั้งศึก)</p>
+      <p><b style="color:#f58bb0">🎵 นักดนตรี (Musician)</b><br>อาชีพพิเศษ! การ์ดเป็น "โน้ต" (โด🔥 เร🧊 มี⚡ ฟา⚔️) เล่นโน้ตให้ตรงลำดับ 3 ใบ = ปล่อย "เพลง" พลังแรง ดูใบที่ขาดได้จากแถบ 🎵 — เล่นครบในเทิร์นเดียวได้พลังเต็ม</p>
+      <p><b style="color:#2a2">⭐ Skill Tree</b><br>เก็บ Skill Point จากการสู้/event มาอัพสกิลเฉพาะสายของ Class (กดไอคอน ⭐ บน map) — ต้องกดยืนยันก่อนอัพ</p>
       <p><b style="color:#88ffbb">💎 Relic</b><br>ของวิเศษติดตัวทั้ง run หาได้จาก Treasure/Event/บอส — เสริม build ข้าม Class ได้</p>
-      <p><b style="color:#ffc844">🔮 Fusion</b><br>ผสมการ์ด 2 ใบตามสูตรเป็นการ์ดใหม่ที่แรงกว่า (ทำที่จุดพัก 🏕️)</p>
-      <p><b style="color:#ffd700">📅 Daily Challenge</b><br>ทุกคนเจอ map เหมือนกันในแต่ละวัน แข่ง leaderboard กันแฟร์ๆ</p>
+      <p><b style="color:#ffc844">🔮 Fusion</b><br>ผสมการ์ด 2 ใบตามสูตรเป็นการ์ดใหม่ที่แรงกว่า (ทำที่จุดพัก 🏕️ — ถ้าผสมได้จะมีป้าย ⚗️ บนหมุดแผนที่)</p>
+      <p><b style="color:#ffd700">📅 Daily Challenge</b><br>ทุกคนเจอ map + Class เหมือนกัน แข่ง leaderboard กันแฟร์ๆ — <b style="color:#ffd700">เปลี่ยนใหม่ทุก 4 วัน</b> และกระดานคะแนนเคลียร์ทุกรอบ</p>
       <p><b style="color:#ff6868">💀 ระวัง!</b><br>ตายแล้วจบเลย (roguelike) — เข้าห้องสู้แล้วปิดเกมหนีไม่ได้ Save จะหาย</p>
     </div>
     <button class="modal-close" id="howto-modal-close">✕ ปิด</button>
@@ -679,7 +684,7 @@ const DB=[
   {id:'wfortress',name:'Fortress',type:'defense',cost:2,rarity:'u',desc:'+20 บล็อก แต่ไม่ draw เทิร์นถัดไป',block:20,sp:'fortress'},
   {id:'mchain',name:'Chain Lightning',type:'magic',cost:2,rarity:'u',desc:'6 ดมจ ×3 ทะลุบล็อก',damage:6,hits:3,piercing:true,element:'lightning'},
   {id:'mblink',name:'Blink',type:'skill',cost:1,rarity:'u',desc:'หลีกเลี่ยงการโจมตีถัดไป + หยิบ 1',sp:'blink'},
-  {id:'moverload',name:'Overload',type:'magic',cost:0,rarity:'u',desc:'6 ดมจ แต่ใส่ Daze ใน deck',damage:6,sp:'moverload',exhaust:false,element:'lightning'},
+  {id:'moverload',name:'Overload',type:'magic',cost:0,rarity:'u',desc:'6 ดมจ แต่ใส่ Dazeใน deck',damage:6,sp:'moverload',exhaust:false,element:'lightning'},
   {id:'mfocus',name:'Mana Focus',type:'skill',cost:0,rarity:'u',desc:'หยิบ 2 + มานา+1 ถ้ามือมี magic 3 ใบ',sp:'mfocus'},
   {id:'rbackstab',name:'Backstab',type:'attack',cost:0,rarity:'u',desc:'8 ดมจ + ถ้าเล่นใบแรก +8',sp:'backstab',element:'physical'},
   {id:'rsmoke',name:'Smoke Bomb',type:'skill',cost:1,rarity:'u',desc:'บล็อก+5 + ทำให้ศัตรูช้า 1 เทิร์น',block:5,slow:true,element:'ice'},
@@ -689,14 +694,14 @@ const DB=[
   {id:'pblessing',name:'Blessing',type:'skill',cost:1,rarity:'u',desc:'บล็อก+8 + โจมตี+3 เทิร์นนี้',block:8,tempAtk:3},
   {id:'pdivine',name:'Divine Shield',type:'defense',cost:2,rarity:'u',desc:'บล็อก 999 เทิร์นนี้ [EX]',sp:'divine',exhaust:true},
   {id:'psanctify',name:'Sanctify',type:'skill',cost:1,rarity:'u',desc:'ลบ Curse ทั้งหมดในมือ + ฟื้น 3/ใบ',sp:'sanctify'},
-  {id:'mpowerchord',name:'Power Chord',type:'attack',cost:1,rarity:'u',desc:'6 ดมจ⚡ + ถ้าใบแรกของเทิร์น เพิ่มโน้ตดัมมี่',damage:6,sp:'powerchord',element:'lightning'},
-  {id:'mtempoup',name:'Tempo Up',type:'attack',cost:1,rarity:'u',desc:'4 ดมจ🔥 + จั่ว 2 ใบ (ศัตรูตีแรงขึ้น 10% เทิร์นหน้า)',damage:4,draw:2,sp:'tempoup',element:'fire'},
-  {id:'mlullaby1',name:'Soft Note',type:'defense',cost:1,rarity:'u',desc:'4 ดมจ🧊 + 5 บล็อก',damage:4,block:5,element:'ice'},
-  {id:'mcrescendo1',name:'Rising Beat',type:'attack',cost:1,rarity:'u',desc:'5 ดมจ⚡ + หยิบ 1 ใบ',damage:5,draw:1,element:'lightning'},
-  {id:'mharmony',name:'Harmony Strike',type:'attack',cost:1,rarity:'u',desc:'8 ดมจ🔥',damage:8,element:'fire'},
-  {id:'mriff',name:'Riff',type:'attack',cost:1,rarity:'u',desc:'5 ดมจ⚔️ ×2',damage:5,hits:2,element:'physical'},
-  {id:'mguard2',name:'Steady Beat',type:'defense',cost:1,rarity:'u',desc:'4 ดมจ🧊 + 7 บล็อก',damage:4,block:7,element:'ice'},
-  {id:'mskillnote',name:'Quick Verse',type:'attack',cost:0,rarity:'u',desc:'3 ดมจ⚔️ + มานา+1',damage:3,manaAdd:1,element:'physical'},
+  {id:'mpowerchord',name:'Power Chord',type:'attack',cost:1,rarity:'u',desc:'6 ดมจ⚡ + ถ้าใบแรกของเทิร์น +4 ดมจ',damage:6,sp:'powerchord',element:'lightning',songNote:true},
+  {id:'mtempoup',name:'Tempo Up',type:'attack',cost:1,rarity:'u',desc:'4 ดมจ🔥 + จั่ว 2 ใบ (ศัตรูตีแรงขึ้น 10% เทิร์นหน้า)',damage:4,draw:2,sp:'tempoup',element:'fire',songNote:true},
+  {id:'mlullaby1',name:'Soft Note',type:'defense',cost:1,rarity:'u',desc:'4 ดมจ🧊 + 5 บล็อก',damage:4,block:5,element:'ice',songNote:true},
+  {id:'mcrescendo1',name:'Rising Beat',type:'attack',cost:1,rarity:'u',desc:'5 ดมจ⚡ + หยิบ 1 ใบ',damage:5,draw:1,element:'lightning',songNote:true},
+  {id:'mharmony',name:'Harmony Strike',type:'attack',cost:1,rarity:'u',desc:'8 ดมจ🔥',damage:8,element:'fire',songNote:true},
+  {id:'mriff',name:'Riff',type:'attack',cost:1,rarity:'u',desc:'5 ดมจ⚔️ ×2',damage:5,hits:2,element:'physical',songNote:true},
+  {id:'mguard2',name:'Steady Beat',type:'defense',cost:1,rarity:'u',desc:'4 ดมจ🧊 + 7 บล็อก',damage:4,block:7,element:'ice',songNote:true},
+  {id:'mskillnote',name:'Quick Verse',type:'attack',cost:0,rarity:'u',desc:'3 ดมจ⚔️ + มานา+1',damage:3,manaAdd:1,element:'physical',songNote:true},
   {id:'mcointoss',name:'Coin Toss',type:'attack',cost:0,rarity:'u',desc:'25 ดมจ ทะลุเกราะ',damage:25,piercing:true,goldCost:20,element:'physical'},
   {id:'mbribe',name:'Bribe',type:'defense',cost:1,rarity:'u',desc:'+20 บล็อก',block:20,goldCost:15},
   {id:'mpickpocket',name:'Pickpocket',type:'attack',cost:1,rarity:'u',desc:'5 ดมจ ×2 ถ้าทะลุบล็อกได้ Gold 5',damage:5,hits:2,sp:'pickpocket',element:'physical'},
@@ -739,6 +744,16 @@ function getRarityPool(rarity){
     if(c.songNote && (!G.player || G.player.cls !== 'musician')) return false;
     return true;
   });
+}
+// Musician: note cards appear ~2.2x more often in reward picks
+function pickFromPool(pool){
+  if(!pool||pool.length===0)return undefined;
+  if(G.player && G.player.cls==='musician'){
+    const weighted=[];
+    pool.forEach(c=>{ weighted.push(c); if(c.songNote){weighted.push(c);weighted.push(c);} });
+    return weighted[Math.floor(Math.random()*weighted.length)];
+  }
+  return pool[Math.floor(Math.random()*pool.length)];
 }
 
 // ============ ENEMIES ============
@@ -1020,59 +1035,122 @@ function activateUlt(){
 }
 
 // ============ SONGBOOK SYSTEM ============
+// Note → element mapping (C2: notes shown to player, element works behind the scenes)
+const NOTE_MAP = {
+  fire:      {note:'โด', solfa:'Do', icon:'🔥', color:'#d4533a'},
+  ice:       {note:'เร', solfa:'Re', icon:'🧊', color:'#3a6ad4'},
+  lightning: {note:'มี', solfa:'Mi', icon:'⚡', color:'#d4a017'},
+  physical:  {note:'ฟา', solfa:'Fa', icon:'⚔️', color:'#888'},
+};
+function noteLabel(el){ const m=NOTE_MAP[el]; return m?`${m.icon}${m.note}`:''; }
+function songNotesLabel(notes){ return notes.map(n=>noteLabel(n)).join('·'); }
+
 const SONGBOOK=[
-  {notes:['fire','fire','lightning'],name:'March of Fire',icon:'🔥',desc:'14 ดมจ ทะลุเกราะ + ติดไฟ 4',sp:'song_march'},
-  {notes:['ice','ice','physical'],name:'Lullaby',icon:'🌙',desc:'16 บล็อก + แช่แข็งศัตรู',sp:'song_lullaby'},
-  {notes:['lightning','lightning','fire'],name:'Crescendo',icon:'🎶',desc:'มานา+2 + จั่ว 1 ใบ',sp:'song_crescendo'},
-  {notes:['physical','ice','fire'],name:'Healing Hymn',icon:'💚',desc:'ฟื้น 12 HP + รับ 10 บล็อก',sp:'song_healhymn'},
+  {notes:['fire','fire','lightning'],name:'March of Fire',icon:'🔥',desc:'16 ดมจ ทะลุเกราะ + ไฟ 5',sp:'song_march'},
+  {notes:['lightning','lightning','lightning'],name:'Thunder Solo',icon:'⚡',desc:'10 ดมจ ×3 (ยิงรัว)',sp:'song_thunder'},
+  {notes:['lightning','lightning','fire'],name:'Crescendo',icon:'🎶',desc:'มานา+2 + จั่ว 2 ใบ',sp:'song_crescendo'},
+  {notes:['ice','ice','physical'],name:'Lullaby',icon:'🌙',desc:'15 บล็อก + แช่แข็งศัตรู',sp:'song_lullaby'},
+  {notes:['ice','ice','ice'],name:'Frost Hymn',icon:'❄️',desc:'พิษ 6 + ศัตรูอ่อนแอ 2 เทิร์น',sp:'song_frost'},
+  {notes:['physical','ice','fire'],name:'Healing Hymn',icon:'💚',desc:'ฟื้น 14 HP + 10 บล็อก',sp:'song_healhymn'},
+  {notes:['physical','physical','fire'],name:'War Anthem',icon:'📣',desc:'โจมตี+5 ตลอดสู้ + จั่ว 1',sp:'song_anthem'},
+  {notes:['physical','physical','lightning'],name:'Battle Tempo',icon:'🥁',desc:'โจมตี+4 เทิร์นนี้ + การ์ดถัดไปฟรี',sp:'song_tempo'},
+  {notes:['fire','ice','lightning'],name:'Dissonance',icon:'🎻',desc:'ศัตรูโจมตี-30% 2 เทิร์น + 8 ดมจ',sp:'song_dissonance'},
+  {notes:['fire','physical','lightning'],name:'Power Ballad',icon:'🎸',desc:'20 ดมจ + ฟื้น 8 HP',sp:'song_ballad'},
 ];
 function checkSongbook(card){
   const b=G.battle;
+  if(!card.songNote)return; // นับเฉพาะการ์ดโน้ตจริง ไม่นับการ์ดสามัญที่มีธาตุ
   const note=card.element;
   if(!['fire','ice','lightning','physical'].includes(note))return;
   b.recentNotes.push(note);
+  if(!b.noteTurns)b.noteTurns=[];
+  b.noteTurns.push(b.turnCount||0);
   if(b.recentNotes.length>3)b.recentNotes.shift();
-  if(b.recentNotes.length<3)return;
+  if(b.noteTurns.length>3)b.noteTurns.shift();
+  if(b.recentNotes.length<3){renderSongTracker();return;}
   const seq=b.recentNotes.join('-');
   let song=SONGBOOK.find(s=>s.notes.join('-')===seq);
-  if(!song)return;
-  {
-    b.recentNotes=[]; 
-    log(`🎵 ${song.icon} ${song.name}! ${song.desc}`,'combo');
-    toast(`🎵 ${song.name}!`);
-    sfx('weak');
-    const pitchMult=hasRelic('perfectPitch')?1+0.15*hasRelic('perfectPitch'):1; 
-    if(song.sp==='song_march'){
-      const bonus=hasRelic('bassdrop')?5*hasRelic('bassdrop'):0;
-      doDmg(Math.floor((14+bonus)*pitchMult),1,true,song.name,'fire');
-      doEBurn(4);
-    }
-    if(song.sp==='song_lullaby'){
-      const blockBonus=hasRelic('soothingMelody')?5*hasRelic('soothingMelody'):0;
-      doBlock(15+blockBonus,song.name);
-      if(tryFreeze(b.e))log(`🌙 ${b.e.name} ถูกบังคับให้ช้า (ข้ามเทิร์น)!`,'combo');
-      else {b.e.slowed=true;log(`🛡️ ${b.e.name} ต้านการแช่แข็ง (แค่ช้า)`,'stat');}
-    }
-    if(song.sp==='song_crescendo'){
-      b.mana+=2;draw(1);
-    }
-    if(song.sp==='song_healhymn'){
-      const healBonus=hasRelic('resonance')?2*hasRelic('resonance'):0; 
-      const blockBonus=hasRelic('soothingMelody')?5*hasRelic('soothingMelody'):0;
-      doHeal(12+healBonus,song.name);
-      doBlock(10+blockBonus,song.name);
-    }
-    if(hasRelic('resonance')){doHeal(2*hasRelic('resonance'),'Resonance');}
-    if(hasRelic('encore')){draw(hasRelic('encore'));}
-    b._songComboCount=(b._songComboCount||0)+1;
-    musicianUltCombo();
-    if(hasRelic('finale')&&b._songComboCount>=3&&!b._finaleTriggered){
-      b._finaleTriggered=true;
-      doDmg(30,1,true,'🎆 FINALE!','physical');
-      toast('🎆 FINALE! คอมโบครบ 3 ครั้ง!');
-    }
-    renderSongTracker();
+  if(!song){renderSongTracker();return;}
+  const sameTurn = (b.noteTurns.length===3 && b.noteTurns[0]===b.noteTurns[2]) || hasRelic('sustain');
+  b.recentNotes=[]; b.noteTurns=[];
+  resolveSong(song, sameTurn);
+}
+function resolveSong(song, sameTurn){
+  const b=G.battle;
+  const e=b.e;
+  let powerMult = sameTurn ? 1 : 0.7;
+  // Crescendo Master: เพลงที่ 2+ ในเทิร์นเดียวกัน แรงขึ้น
+  if(b._comboTurn!==b.turnCount){ b._comboTurn=b.turnCount; b._combosThisTurn=0; }
+  b._combosThisTurn++;
+  let crescTag='';
+  if(hasRelic('crescendoMaster') && b._combosThisTurn>=2){
+    const cresc=0.2*hasRelic('crescendoMaster')*(b._combosThisTurn-1);
+    powerMult*=1+cresc;
+    crescTag=` 🎶x${b._combosThisTurn}`;
   }
+  const tag = sameTurn ? '' : ' (ข้ามเทิร์น 70%)';
+  log(`🎵 ${song.icon} ${song.name}!${tag}${crescTag} ${song.desc}`,'combo');
+  toast(`🎵 ${song.name}!${sameTurn?'':' (70%)'}${crescTag}`);
+  sfx('weak');
+  const pitchMult=(hasRelic('perfectPitch')?1+0.12*hasRelic('perfectPitch'):1)*powerMult;
+  if(song.sp==='song_march'){
+    const bonus=hasRelic('bassdrop')?5*hasRelic('bassdrop'):0;
+    doDmg(Math.floor((16+bonus)*pitchMult),1,true,song.name,'fire');
+    doEBurn(5);
+  }
+  if(song.sp==='song_thunder'){
+    doDmg(Math.floor(10*pitchMult),3,false,song.name,'lightning');
+  }
+  if(song.sp==='song_crescendo'){
+    b.mana+=2;draw(2);
+  }
+  if(song.sp==='song_lullaby'){
+    const blockBonus=hasRelic('soothingMelody')?5*hasRelic('soothingMelody'):0;
+    doBlock(Math.floor((15+blockBonus)*powerMult),song.name);
+    if(tryFreeze(e))log(`🌙 ${e.name} ถูกแช่แข็ง (ข้ามเทิร์น)!`,'combo');
+    else {e.slowed=true;log(`🛡️ ${e.name} ต้านการแช่แข็ง (แค่ช้า)`,'stat');}
+  }
+  if(song.sp==='song_frost'){
+    doEPoison(6);
+    e.vulnTurns=Math.max(e.vulnTurns||0,2);
+    log(`❄️ ${e.name} อ่อนแอ 2 เทิร์น (รับดาเมจเพิ่ม)`,'combo');
+  }
+  if(song.sp==='song_healhymn'){
+    const healBonus=hasRelic('resonance')?2*hasRelic('resonance'):0; 
+    const blockBonus=hasRelic('soothingMelody')?5*hasRelic('soothingMelody'):0;
+    doHeal(Math.floor((14+healBonus)*powerMult),song.name);
+    doBlock(Math.floor((10+blockBonus)*powerMult),song.name);
+  }
+  if(song.sp==='song_anthem'){
+    b.atkBuff=(b.atkBuff||0)+5;
+    draw(1);
+    log(`📣 โจมตี +5 ตลอดการต่อสู้!`,'combo');
+  }
+  if(song.sp==='song_tempo'){
+    b.tempAtk=(b.tempAtk||0)+4;
+    b.nextFree=true;
+    log(`🥁 โจมตี+4 เทิร์นนี้ + การ์ดถัดไปฟรี!`,'combo');
+  }
+  if(song.sp==='song_dissonance'){
+    e.weakTurns=Math.max(e.weakTurns||0,2);
+    doDmg(Math.floor(8*pitchMult),1,false,song.name,'lightning');
+    log(`🎻 ${e.name} โจมตีลดลง 30% 2 เทิร์น`,'combo');
+  }
+  if(song.sp==='song_ballad'){
+    doDmg(Math.floor(20*pitchMult),1,false,song.name,'fire');
+    doHeal(Math.floor(8*powerMult),song.name);
+  }
+  if(hasRelic('resonance')){doHeal(2*hasRelic('resonance'),'Resonance');}
+  if(hasRelic('encore')){draw(hasRelic('encore'));}
+  b._songComboCount=(b._songComboCount||0)+1;
+  musicianUltCombo();
+  if(hasRelic('finale')&&b._songComboCount>=3&&!b._finaleTriggered){
+    b._finaleTriggered=true;
+    doDmg(25,1,true,'🎆 GRAND FINALE!','physical');
+    toast('🎆 GRAND FINALE! คอมโบครบ 3 ครั้ง!');
+  }
+  if(b.e.hp<=0){battleWin();return;}
+  renderSongTracker();
 }
 function renderSongTracker(){
   const el=document.getElementById('song-tracker');
@@ -1083,12 +1161,90 @@ function renderSongTracker(){
   if(songBtn)songBtn.style.display=isMusician?'inline-block':'none';
   if(!isMusician){el.style.display='none';return;}
   el.style.display='flex';
-  const noteIcon={fire:'🔥',ice:'🧊',lightning:'⚡',physical:'⚔️'};
+  el.style.flexWrap='wrap';
   const slots=[0,1,2].map(i=>{
     const note=b.recentNotes[i];
-    return `<span class="song-slot${note?' filled':''}">${note?noteIcon[note]:'·'}</span>`;
+    const m=note?NOTE_MAP[note]:null;
+    if(m) return `<span class="song-slot filled" style="border-color:${m.color}">${m.icon}</span>`;
+    return `<span class="song-slot">·</span>`;
   }).join('');
-  el.innerHTML=`<span style="font-size:.68em;color:#9070c8;margin-right:4px">🎵</span>${slots}`;
+
+  // near-completion hint: which songs match current prefix
+  let hint='';
+  const cur=b.recentNotes;
+  if(cur.length>0){
+    const matches=SONGBOOK.filter(s=>{
+      for(let i=0;i<cur.length;i++){ if(s.notes[i]!==cur[i]) return false; }
+      return true;
+    });
+    if(matches.length>0 && cur.length>=1){
+      const m=matches[0];
+      const need=m.notes[cur.length];
+      if(need){
+        const nm=NOTE_MAP[need];
+        hint=`<span style="font-size:.62em;color:#ffd27a;margin-left:6px;font-weight:600">→ ${nm.icon}${nm.note} = ${m.icon}${m.name}${matches.length>1?` (+${matches.length-1})`:''}</span>`;
+      }
+    }
+  }
+  // clear button when notes are present
+  const clearBtn = cur.length>0
+    ? `<span id="clear-notes-btn" style="font-size:.6em;color:#ff8888;margin-left:6px;cursor:pointer;border:1px solid #aa4444;border-radius:6px;padding:1px 6px;touch-action:manipulation">🗑️ ล้าง</span>`
+    : '';
+  // transpose button (Conductor skill): change last note, 1/turn
+  let transBtn='';
+  if(hasRelic('transpose') && cur.length>0 && !b._transposeUsed){
+    transBtn=`<span id="transpose-btn" style="font-size:.6em;color:#88ddff;margin-left:4px;cursor:pointer;border:1px solid #4488cc;border-radius:6px;padding:1px 6px;touch-action:manipulation">🔄 เปลี่ยนโน้ต</span>`;
+  }
+  el.innerHTML=`<span style="font-size:.68em;color:#9070c8;margin-right:4px">🎵</span>${slots}${hint}${clearBtn}${transBtn}`;
+  const cb=document.getElementById('clear-notes-btn');
+  if(cb)tap(cb,()=>{ b.recentNotes=[]; b.noteTurns=[]; toast('🎵 ล้างโน้ตแล้ว'); renderSongTracker(); });
+  const tb=document.getElementById('transpose-btn');
+  if(tb)tap(tb,()=>openTransposePicker());
+}
+function openTransposePicker(){
+  const b=G.battle;
+  if(!b||b._transposeUsed||b.recentNotes.length===0)return;
+  let ov=document.getElementById('transpose-ov');
+  if(ov)ov.remove();
+  ov=document.createElement('div');
+  ov.id='transpose-ov';
+  ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:9000;padding:24px';
+  const lastNote=b.recentNotes[b.recentNotes.length-1];
+  const lm=NOTE_MAP[lastNote];
+  const opts=['fire','ice','lightning','physical'].map(eln=>{
+    const m=NOTE_MAP[eln];
+    return `<div class="transpose-opt" data-el="${eln}" style="background:${m.color};border-radius:8px;padding:12px 8px;text-align:center;cursor:pointer;font-weight:700;color:#fff;min-height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;touch-action:manipulation"><span style="font-size:1.4em">${m.icon}</span><span style="font-size:.8em">${m.note}</span></div>`;
+  }).join('');
+  ov.innerHTML=`<div style="background:#161029;border:2px solid #4488cc;border-radius:14px;padding:18px;max-width:300px;width:100%;box-shadow:0 6px 24px rgba(0,0,0,.6)">
+    <div style="color:#88ddff;font-weight:700;font-size:1.05em;margin-bottom:4px;text-align:center">🔄 เปลี่ยนโน้ตล่าสุด</div>
+    <div style="color:#9070c8;font-size:.8em;text-align:center;margin-bottom:12px">โน้ตล่าสุด: ${lm.icon}${lm.note} → เลือกเปลี่ยนเป็น</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px">${opts}</div>
+    <button id="transpose-cancel" class="btn btn-dim" style="width:100%;margin:0;min-height:40px">ยกเลิก</button>
+  </div>`;
+  document.body.appendChild(ov);
+  ov.addEventListener('click',e=>{if(e.target===ov)ov.remove();});
+  tap(document.getElementById('transpose-cancel'),()=>ov.remove());
+  ov.querySelectorAll('.transpose-opt').forEach(opt=>{
+    tap(opt,()=>{
+      const newEl=opt.dataset.el;
+      b.recentNotes[b.recentNotes.length-1]=newEl;
+      b._transposeUsed=true;
+      ov.remove();
+      toast(`🔄 เปลี่ยนเป็น ${NOTE_MAP[newEl].icon}${NOTE_MAP[newEl].note}`);
+      // check if this completes a song now
+      if(b.recentNotes.length>=3){
+        const seq=b.recentNotes.join('-');
+        const song=SONGBOOK.find(s=>s.notes.join('-')===seq);
+        if(song){
+          const sameTurn=(b.noteTurns.length===3 && b.noteTurns[0]===b.noteTurns[2])||hasRelic('sustain');
+          b.recentNotes=[]; b.noteTurns=[];
+          resolveSong(song, sameTurn);
+          return;
+        }
+      }
+      renderSongTracker();
+    });
+  });
 }
 
 // ============ FUSION RECIPES ============
@@ -1188,20 +1344,20 @@ const SKILL_TREES={
     ]},
   },
   musician:{
-    rhythm:{label:'🎼 Rhythm',skills:[
-      {id:'mu_r1',name:'Perfect Pitch',desc:'คอมโบ Songbook ดีลเพิ่ม 15%/lv',passive:'perfectPitch',cost:2},
-      {id:'mu_r2',name:'Quick Tempo',desc:'เริ่มต่อสู้มีโน้ตติดตัว 1 ตัว/lv (เริ่ม combo ง่ายขึ้น)',passive:'backupVocals',cost:1},
-      {id:'mu_r3',name:'Encore',desc:'คอมโบสำเร็จ จั่วการ์ดเพิ่ม 1/lv',passive:'encore',cost:3},
+    conductor:{label:'🎚️ Conductor',skills:[
+      {id:'mu_c1',name:'Improvise',desc:'เริ่มต่อสู้มีโน้ตติดตัว 1 ตัว/lv (สุ่มธาตุ — เริ่มคอมโบง่ายขึ้น)',passive:'improvise',cost:2},
+      {id:'mu_c2',name:'Transpose',desc:'1 ครั้ง/เทิร์น กดเปลี่ยนโน้ตล่าสุดเป็นธาตุอะไรก็ได้ (ปลดล็อก Lv.1)',passive:'transpose',cost:3},
+      {id:'mu_c3',name:'Sustain',desc:'เพลงที่ทำข้ามเทิร์น ไม่โดนลดเหลือ 70% อีกต่อไป (ได้เต็มเสมอ)',passive:'sustain',cost:3},
     ]},
-    harmony:{label:'🎻 Harmony',skills:[
-      {id:'mu_h1',name:'Soothing Melody',desc:'Lullaby คอมโบ ได้บล็อกเพิ่ม 5/lv',passive:'soothingMelody',cost:2},
-      {id:'mu_h2',name:'Resonance',desc:'ทุกคอมโบสำเร็จ ฟื้น HP 2/lv',passive:'resonance',cost:2},
-      {id:'mu_h3',name:'Mind Over Matter',desc:'HP สูงสุดเพิ่ม 20/lv',passive:'museHp',cost:2},
+    composer:{label:'🎼 Composer',skills:[
+      {id:'mu_co1',name:'Perfect Pitch',desc:'คอมโบ Songbook ดีลผล/ดาเมจเพิ่ม 12%/lv',passive:'perfectPitch',cost:2},
+      {id:'mu_co2',name:'Crescendo Master',desc:'ทำคอมโบติดกันในเทิร์นเดียว เพลงที่ 2+ แรงขึ้น 20%/lv',passive:'crescendoMaster',cost:2},
+      {id:'mu_co3',name:'Grand Finale',desc:'คอมโบสำเร็จ 3 ครั้งในศึก ดีลระเบิด 25 ดมจ ทะลุเกราะ (ครั้งเดียว/สู้)',passive:'finale',cost:5},
     ]},
-    percussion:{label:'🥁 Percussion',skills:[
-      {id:'mu_p1',name:'Power Chord Master',desc:'การ์ด Attack ดีลเพิ่ม 10%/lv',passive:'powerChordMaster',cost:1},
-      {id:'mu_p2',name:'Bass Drop',desc:'March of Fire เพิ่มดาเมจ 5/lv',passive:'bassdrop',cost:2},
-      {id:'mu_p3',name:'Finale',desc:'คอมโบสำเร็จ 3 ครั้งในศึกเดียว ดีลระเบิด 30 ดมจ (ครั้งเดียว/สู้)',passive:'finale',cost:5},
+    virtuoso:{label:'🥁 Virtuoso',skills:[
+      {id:'mu_v1',name:'Fast Fingers',desc:'การ์ดโน้ตใบแรกของเทิร์น คืนมานา 1/lv',passive:'noteRefund',cost:1},
+      {id:'mu_v2',name:'Encore',desc:'คอมโบสำเร็จ จั่ว 1/lv + ฟื้น 2 HP/lv',passive:'encore',cost:2},
+      {id:'mu_v3',name:'Maestro Vigor',desc:'HP สูงสุด+20/lv + เริ่มศึกมีบล็อก 5/lv',passive:'museHp',cost:2},
     ]},
   },
   merchant:{
@@ -1302,18 +1458,47 @@ function renderSkillTreeModal(){
       if(!isMax&&canAfford){
         div.style.cursor='pointer';div.style.touchAction='manipulation';
         tap(div,()=>{
-          if(learnSkill(skill.id)){
-            const newLevel=level+1;
-            toast(`⭐ ${skill.name} → Lv${newLevel}! (-${nextCost} point)`);
-            renderSkillTreeModal();
-            renderMapRelics('map-relics');
-          }
+          confirmSkillUpgrade(skill, level, nextCost);
         });
       }
       skillRow.appendChild(div);
     });
     branchDiv.appendChild(skillRow);
     container.appendChild(branchDiv);
+  });
+}
+
+function confirmSkillUpgrade(skill, level, nextCost){
+  const newLevel=level+1;
+  let ov=document.getElementById('skill-confirm-ov');
+  if(ov)ov.remove();
+  ov=document.createElement('div');
+  ov.id='skill-confirm-ov';
+  ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:9000;padding:24px';
+  ov.innerHTML=`
+    <div style="background:#161029;border:2px solid #ffd700;border-radius:14px;padding:18px;max-width:300px;width:100%;text-align:center;box-shadow:0 6px 24px rgba(0,0,0,.6)">
+      <div style="color:#ffd700;font-weight:700;font-size:1.05em;margin-bottom:6px">⭐ ยืนยันอัปเกรด?</div>
+      <div style="color:#fff;font-weight:700;font-size:.95em;margin-bottom:4px">${skill.name} → Lv${newLevel}</div>
+      <div style="color:#9070b8;font-size:.78em;line-height:1.4;margin-bottom:12px">${skill.desc}</div>
+      <div style="background:#1a1400;border:1px solid #cc8800;border-radius:8px;padding:6px;color:#ffd700;font-size:.85em;font-weight:700;margin-bottom:14px">ใช้ ${nextCost} ⭐ (เหลือ ${G.skillPoints-nextCost})</div>
+      <div style="display:flex;gap:8px">
+        <button id="skill-confirm-no" class="btn btn-dim" style="flex:1;margin:0;min-height:42px">ยกเลิก</button>
+        <button id="skill-confirm-yes" class="btn btn-gold" style="flex:1;margin:0;min-height:42px">ยืนยัน</button>
+      </div>
+    </div>`;
+  document.body.appendChild(ov);
+  const close=()=>ov.remove();
+  ov.addEventListener('click',e=>{if(e.target===ov)close();});
+  tap(document.getElementById('skill-confirm-no'),close);
+  tap(document.getElementById('skill-confirm-yes'),()=>{
+    if(learnSkill(skill.id)){
+      toast(`⭐ ${skill.name} → Lv${newLevel}! (-${nextCost} point)`);
+      close();
+      renderSkillTreeModal();
+      renderMapRelics('map-relics');
+    }else{
+      close();
+    }
   });
 }
 
@@ -1376,7 +1561,7 @@ function loadRun(){
     if(!G.player.name)G.player.name='Anonymous';
     if(!G.player.clsName)G.player.clsName=G.player.cls||'?';
     G.pendingPacks=G.pendingPacks||0;G._postBossShop=false;G._inPostBossShop=false;
-    if(G.daily&&G.dailyDate===todayStr())enableDailyRng();
+    if(G.daily&&G.dailyDate===periodKey())enableDailyRng();
     else{disableDailyRng();G.daily=false;}
     return true;
   }catch(e){clearRun();return false;}
@@ -1446,9 +1631,23 @@ function _mulberry32(){
   return((t^(t>>>14))>>>0)/4294967296;
 }
 function dateSeed(){
-  const d=new Date();
-  return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();
+  // Challenge changes every 4 days: seed from the 4-day period number
+  return challengePeriod();
 }
+function challengePeriod(){
+  // days since epoch, divided into 4-day blocks
+  const d=new Date();
+  const dayNum=Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/86400000);
+  return Math.floor(dayNum/4);
+}
+function periodDates(){
+  // start & end date of current 4-day challenge period
+  const period=challengePeriod();
+  const startDay=period*4;
+  const fmt=ms=>{const x=new Date(ms);return `${x.getUTCFullYear()}-${String(x.getUTCMonth()+1).padStart(2,'0')}-${String(x.getUTCDate()).padStart(2,'0')}`;};
+  return{start:fmt(startDay*86400000),end:fmt((startDay+3)*86400000),id:period};
+}
+function periodKey(){ return 'P'+challengePeriod(); }
 function todayStr(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
 function enableDailyRng(){
   _dailyActive=true;_seedState=dateSeed();
@@ -1498,7 +1697,13 @@ function cardEl(card,opts={}){
     +(card.retain?'<span class="cbadge cb-rt">RET</span>':'')
     +(card.type==='buff'?'<span class="cbadge cb-buf">BUF</span>':'')
     +(card.type==='curse'?'<span class="cbadge cb-crs">CURSE</span>':'');
-  const elementBadge=card.element?`<div style="position:absolute;top:5px;right:5px;font-size:.9em;filter:drop-shadow(0 0 2px #000)">${ELEMENT_ICON[card.element]}</div>`:'';
+  let elementBadge='';
+  if(card.songNote && card.element && typeof NOTE_MAP!=='undefined' && NOTE_MAP[card.element]){
+    const nm=NOTE_MAP[card.element];
+    elementBadge=`<div style="position:absolute;top:4px;right:4px;background:${nm.color};border-radius:6px;padding:0px 5px;font-size:.62em;font-weight:700;color:#fff;filter:drop-shadow(0 0 2px #000)">${nm.icon}${nm.note}</div>`;
+  } else if(card.element){
+    elementBadge=`<div style="position:absolute;top:5px;right:5px;font-size:.9em;filter:drop-shadow(0 0 2px #000)">${ELEMENT_ICON[card.element]}</div>`;
+  }
   const weakBadge=el.classList.contains('weak-hit')?`<div style="position:absolute;bottom:24px;right:4px;font-size:.85em;filter:drop-shadow(0 0 3px #44ff44)">💥</div>`:'';
   const goldBadge=card.goldCost?`<div style="position:absolute;top:${card.element?'20px':'5px'};right:4px;background:#2a1a00;border:1px solid #ffc844;border-radius:5px;padding:0px 4px;font-size:.5em;color:#ffc844;font-weight:700;white-space:nowrap">-${card.goldCost}💰</div>`:'';
   
@@ -1538,7 +1743,7 @@ function setLBMode(mode){
   if(mode==='daily'){
     dayBtn.style.cssText='flex:1;max-width:130px;padding:6px;border-radius:8px;border:2px solid #ffd700;background:#1a1400;color:#ffd700;font-size:.78em;font-weight:700;cursor:pointer';
     allBtn.style.cssText='flex:1;max-width:130px;padding:6px;border-radius:8px;border:2px solid #2e1e5a;background:#111128;color:#9070c8;font-size:.78em;font-weight:700;cursor:pointer';
-    if(titleEl)titleEl.textContent=`📅 Daily ${todayStr()}`;
+    if(titleEl){const pd=periodDates();titleEl.textContent=`📅 Daily (${pd.start} ถึง ${pd.end})`;}
   }else{
     allBtn.style.cssText='flex:1;max-width:130px;padding:6px;border-radius:8px;border:2px solid #ffd700;background:#1a1400;color:#ffd700;font-size:.78em;font-weight:700;cursor:pointer';
     dayBtn.style.cssText='flex:1;max-width:130px;padding:6px;border-radius:8px;border:2px solid #2e1e5a;background:#111128;color:#9070c8;font-size:.78em;font-weight:700;cursor:pointer';
@@ -1548,7 +1753,7 @@ function setLBMode(mode){
 }
 function filterLB(lb){
   if(_lbMode==='daily'){
-    const today=todayStr();
+    const today=periodKey();
     return lb.filter(r=>r.daily===true&&r.dailyDate===today);
   }
   return lb;
@@ -1559,7 +1764,7 @@ function updateLB(){
       fbDb.collection('leaderboard').where('daily','==',true).limit(50).get()
         .then(snapshot=>{
           let lb=snapshot.docs.map(doc=>doc.data());
-          lb=lb.filter(r=>r.dailyDate===todayStr()).sort((a,b)=>b.floor-a.floor);
+          lb=lb.filter(r=>r.dailyDate===periodKey()).sort((a,b)=>b.floor-a.floor);
           renderLBRows(lb,true);
         })
         .catch(err=>renderLocalLB());
@@ -1595,8 +1800,7 @@ function saveLB(floor){
   localStorage.setItem('ct_lb2',JSON.stringify(lb.slice(0,10)));
   if(fbDb) fbDb.collection('leaderboard').add(entry).catch(err=>null);
 }
-
-// ============ BATTLE LOGIC ============
+  // ============ BATTLE LOGIC ============
 function startBattle(isElite=false,isBoss=false){
   enStatPanelOpen=false; 
   const bossIdx=(G.actNum||1)-1;
@@ -1647,7 +1851,7 @@ function startBattle(isElite=false,isBoss=false){
     phoenixActive:false,turnCount:0,
     over:false,auto:false,autoTmr:null,recent:[],
     extraTurn:0,nextFree:false,nextAtkBuff:0,
-    firstTurn:true,cardsPlayedThisTurn:0,_rebirthUsed:false,permDef:0,recentNotes:[],
+    firstTurn:true,cardsPlayedThisTurn:0,_rebirthUsed:false,permDef:0,recentNotes:[],noteTurns:[],
     ult:0,ultUsed:0,
   };
 
@@ -1662,11 +1866,13 @@ function startBattle(isElite=false,isBoss=false){
     if(capBonus>0)log(`💰 Capitalism: มีทอง ${G.gold} → โจมตี+${capBonus}${capBonus>=30?' (สูงสุด)':''}`,'stat');
   }
   if(hasRelic('firstTurnAtk'))G.battle.atkBuff+=4*hasRelic('firstTurnAtk');
-  if(hasRelic('backupVocals')){
-    const preNotes=Math.min(hasRelic('backupVocals'),2);
-    for(let i=0;i<preNotes;i++)G.battle.recentNotes.push('skill'); 
-    log(`🎵 Backup Vocals: เริ่มต้นมีโน้ตติดตัว ${preNotes} ตัว`,'stat');
+  if(hasRelic('improvise')){
+    const n=Math.min(hasRelic('improvise'),2);
+    const elems=['fire','ice','lightning','physical'];
+    for(let i=0;i<n;i++){G.battle.recentNotes.push(elems[Math.floor(Math.random()*4)]);G.battle.noteTurns.push(0);}
+    log(`🎵 Improvise: เริ่มมีโน้ตติดตัว ${n} ตัว`,'stat');
   }
+  if(hasRelic('museHp')){G.battle.block+=5*hasRelic('museHp');}
 
   draw(5+hasRelic('drawMore')+hasRelic('relicDraw')); 
   renderBattle();showSc('sc-battle');
@@ -1709,7 +1915,7 @@ function playCard(idx){
   if(b._ultRogueFree&&card.type!=='curse')cost=0;
 
   let paidWithGold = false;
-  if(card.goldCost){
+  if(card.goldCost && cost > 0){
     if(G.gold >= card.goldCost){
       paidWithGold = true; 
     } else {
@@ -1801,7 +2007,6 @@ function playCard(idx){
   }
   if(card.draw)draw(card.draw);
   
-  // 🛠️ แก้ไข: ตอนที่บวกมานา ให้แสดงข้อความแจ้งเตือนด้วย
   if(card.manaAdd){
     b.mana+=card.manaAdd;
     toast(`💎 +${card.manaAdd} มานา!`);
@@ -1845,10 +2050,8 @@ function playCard(idx){
   if(sp==='fortress2'){b.skipDraw=true;log('Unbreakable: ไม่ draw เทิร์นถัดไป','stat');}
   
   if(sp==='powerchord'&&b.played===1){
-    b.recentNotes.push('attack');
-    if(b.recentNotes.length>3)b.recentNotes.shift();
-    log('Power Chord: เพิ่มโน้ตดัมมี่ (ใบแรกของเทิร์น)','stat');
-    renderSongTracker();
+    doDmg(4,1,false,'Power Chord (ใบแรก)','lightning');
+    log('Power Chord: ใบแรกของเทิร์น +4 ดมจ','stat');
   }
   if(sp==='tempoup'){
     b.e._tempoUpBonus=(b.e._tempoUpBonus||0)+0.1;
@@ -1887,7 +2090,14 @@ function playCard(idx){
 
   if(card.retain&&!card._used){card._used=true;b.hand.push(card);b.disc.pop();}
   checkCombo(card);
-  if(G.player.cls==='musician')checkSongbook(card);
+  if(G.player.cls==='musician'){
+    if(card.songNote && hasRelic('noteRefund') && !b._noteRefundUsed){
+      b._noteRefundUsed=true;
+      b.mana+=hasRelic('noteRefund');
+      log(`🎵 Quick Tempo: คืนมานา ${hasRelic('noteRefund')}`,'stat');
+    }
+    checkSongbook(card);
+  }
   if(b.e.hp<=0){battleWin();return;}
   checkArcaneRebirth();
   if(G.player.hp<=0){
@@ -1941,7 +2151,7 @@ function doBlock(amt,src){
   const b=G.battle;
   if(hasRelic('blockBoost')) amt=Math.floor(amt*(1+0.15*hasRelic('blockBoost')));
   b.block+=amt; b.tBlk+=amt;
-  if(G.player.cls==='paladin'&&amt>0)gainUlt(Math.min(amt,30));
+  if(G.player.cls==='paladin'&&amt>0&&src!=='พรศักดิ์สิทธิ์')gainUlt(Math.min(amt,30));
   log(`${src}: +${amt} บล็อก`,'blk');
   if(amt>0)sfx('block');
   
@@ -1959,7 +2169,7 @@ function doHeal(amt,src){
   }
   
   G.player.hp=Math.min(G.player.maxHp,G.player.hp+amt);
-  if(G.battle&&G.player.cls==='paladin'&&amt>0)gainUlt(Math.min(amt,30));
+  if(G.battle&&G.player.cls==='paladin'&&amt>0&&src!=='พรศักดิ์สิทธิ์')gainUlt(Math.min(amt,30));
   log(`${src}: ฟื้น ${amt} HP`,'heal');
   if(amt>0)sfx('heal');
   
@@ -2020,6 +2230,7 @@ async function endTurn(){
   const retainedCards = [];
   b.hand.forEach(c => {
     if(c.retain) { c._used = false; retainedCards.push(c); }
+    else if(c.type === 'curse' && c.exhaust) { b.exhaust.push(c); } 
     else { b.disc.push(c); }
   });
   b.hand = retainedCards;
@@ -2052,9 +2263,9 @@ async function endTurn(){
   b.dmgTakenLastEnemyTurn=b.dmgTakenThisTurn;
   b.mana=b.maxMana;b.block=0;b.tempAtk=0;b.played=0;b.tDmg=0;b.tBlk=0;
   if(b.nextManaDrain){b.mana=Math.max(0,b.mana-2);b.nextManaDrain=false;log('🌌 มานาถูกดูด -2!','stat');}
-  b.recent=[]; b.recentNotes=[];
+  b.recent=[]; 
   b._ultPaladinShield=false;b._ultRogueFree=false;
-  b.dmgTakenThisTurn=0;b.cardsPlayedThisTurn=0;
+  b.dmgTakenThisTurn=0;b.cardsPlayedThisTurn=0;b._noteRefundUsed=false;b._transposeUsed=false;
   if(b.playerBurn>0)b.playerBurn=Math.max(0,b.playerBurn-1);
   if(b.e.vulnTurns>0)b.e.vulnTurns--;if(b.e.weakTurns>0)b.e.weakTurns--;
   if(b.extraTurn>0){b.extraTurn--;toast('🔄 เทิร์นพิเศษ!');log('เทิร์นพิเศษ!','combo');}
@@ -2159,7 +2370,10 @@ async function enemyTurn(){
       shake('en-spr');
       await animPlayerHit(fd,'crit');
       if(fd>0&&hasRelic('bloodArmor')){const bAmt=Math.floor(fd*0.5*hasRelic('bloodArmor'));b.block+=bAmt;}
-      if(fd>0&&hasRelic('thorn'))e.hp=Math.max(0,e.hp-3*hasRelic('thorn'));
+      if(fd>0&&hasRelic('thorn')){
+        e.hp=Math.max(0,e.hp-3*hasRelic('thorn'));
+        if(e.hp<=0){battleWin();return;}
+      }
       if(G.player.hp<=0){
         if(b.phoenixActive){G.player.hp=1;b.phoenixActive=false;toast('🦅 PHOENIX!');}
         else{G.player.hp=0;battleLose();return;}
@@ -2206,9 +2420,12 @@ async function enemyTurn(){
         }
       }
 
-      if(hasRelic('thorn')&&fd>0)e.hp=Math.max(0,e.hp-3*hasRelic('thorn'));
+      if(hasRelic('thorn')&&fd>0){
+        e.hp=Math.max(0,e.hp-3*hasRelic('thorn'));
+        if(e.hp<=0){battleWin();return;}
+      }
       let logMsg=`${e.name} ${pat==='big'?'โจมตีหนัก':'โจมตี'} ${raw} ดมจ`;
-      if(bl>0)logMsg+=` (บล็อกกัน ${bl})`;
+      if(bl>0)logMsg+=`(บล็อกกัน ${bl})`;
       logMsg+=` → คุณเสีย ${fd} HP (เหลือ ${Math.max(0,G.player.hp)})`;
       log(logMsg,'dmg');
       if(hasRelic('thorn')&&fd>0)log(`🌹 Thorn สะท้อน ${3*hasRelic('thorn')} ดมจ คืน ${e.name}`,'combo');
@@ -2235,7 +2452,10 @@ async function enemyTurn(){
         }
       }
 
-      if(hasRelic('thorn')&&fd>0)e.hp=Math.max(0,e.hp-3*hasRelic('thorn'));
+      if(hasRelic('thorn')&&fd>0){
+        e.hp=Math.max(0,e.hp-3*hasRelic('thorn'));
+        if(e.hp<=0){battleWin();return;}
+      }
       let logMsg2=`${e.name} ร่ายเวทย์ ${raw} ดมจ`;
       if(preBlock>0)logMsg2+=` (บล็อกกัน ${preBlock})`;
       if(e.allMagicPiercing)logMsg2+=` [ทะลุบล็อก]`;
@@ -2358,13 +2578,11 @@ function renderBattle(){
   
   const mr=document.getElementById('mana-row');mr.innerHTML='';
   
-  // 🛠️ แก้ไข: ให้แสดงจุดมานาตามจำนวนมานาที่มีจริงๆ (แม้จะเกินหลอด Max)
   const displayMana = Math.max(b.maxMana, b.mana);
   for(let i=0;i<displayMana;i++){
     const d=document.createElement('div');
     d.className=`md ${i<b.mana?'mf':'me'}`;
     
-    // ไฮไลต์พิเศษ! ถ้าเป็น "มานาโบนัส" ที่ล้นหลอดเกิน Max ให้แสดงเป็นสีฟ้าสว่าง
     if(i >= b.maxMana && i < b.mana) {
         d.style.background = 'radial-gradient(circle at 35% 30%, #88ddff, #0088ff)';
         d.style.boxShadow = '0 0 8px #0088ffaa, inset 0 1px 1px rgba(255,255,255,.8)';
@@ -2574,7 +2792,7 @@ function drawElitePack(n){
   const res=[];for(let i=0;i<n;i++){
     const r=Math.random();
     const pool=r<0.12?getRarityPool('l'):r<0.45?getRarityPool('r'):getRarityPool('u');
-    res.push({...pool[Math.floor(Math.random()*pool.length)]});
+    res.push({...pickFromPool(pool)});
   }
   return res;
 }
@@ -2642,7 +2860,7 @@ function openNextPack(){
   document.getElementById('pk-hint').textContent='เลือก 0/3';
   renderPack();showSc('sc-pack');
 }
-function drawPack(n){const res=[];for(let i=0;i<n;i++){const r=Math.random();const pool=r<0.03?getRarityPool('l'):r<0.13?getRarityPool('r'):r<0.40?getRarityPool('u'):getRarityPool('c');res.push({...pool[Math.floor(Math.random()*pool.length)]});}return res;}
+function drawPack(n){const res=[];for(let i=0;i<n;i++){const r=Math.random();const pool=r<0.03?getRarityPool('l'):r<0.13?getRarityPool('r'):r<0.40?getRarityPool('u'):getRarityPool('c');res.push({...pickFromPool(pool)});}return res;}
 function renderPack(){
   const c=document.getElementById('pk-cards');c.innerHTML='';
   G._packCards.forEach((card,i)=>{const el=cardEl(card);if(G._packSel.includes(i))el.classList.add('sel');tap(el,()=>togglePkSel(i));c.appendChild(el);});
@@ -2710,7 +2928,7 @@ function _legacyShowMap(){
   document.getElementById('map-gold').textContent=G.gold;document.getElementById('map-hp').textContent=G.player.hp;document.getElementById('map-mhp').textContent=G.player.maxHp;
   renderMapRelics('map-relics');
   const rows=document.getElementById('map-rows');rows.innerHTML='';
-  G.mapNodes.forEach(row=>{const rd=document.createElement('div');rd.className='map-row';row.forEach(node=>{const nd=document.createElement('div');const cls={battle:'mn-battle',elite:'mn-elite',shop:'mn-shop',event:'mn-event',boss:'mn-boss',treasure:'mn-treasure',rest:'mn-rest'}[node.type]||'mn-battle';nd.className=`map-node ${cls} mn-current`;nd.innerHTML=`<span>${node.label}</span>`;tap(nd,()=>enterNode(node));rd.appendChild(nd);});rows.appendChild(rd);});
+  G.mapNodes.forEach(row=>{const rd=document.createElement('div');rd.className='map-row';row.forEach(node=>{const nd=document.createElement('div');const cls={battle:'mn-battle',elite:'mn-elite',shop:'mn-shop',event:'mn-event',boss:'mn-boss',treasure:'mn-treasure',rest:'mn-rest'}[node.type]||'mn-battle';nd.className=`map-node ${cls} mn-current`;let badge='';if(node.type==='rest'){const fp=countFusablePairs();if(fp>0)badge=`<span class="fuse-node-badge">⚗️${fp}</span>`;}nd.innerHTML=`<span>${node.label}</span>${badge}`;tap(nd,()=>enterNode(node));rd.appendChild(nd);});rows.appendChild(rd);});
   showSc('sc-map');
 }
 
@@ -2845,10 +3063,10 @@ function resolveEvent(choice){
   const ef=choice.effect;
   if(ef==='skip'){afterNode();return;}
   if(ef==='heal50'){if(G.gold<choice.cost){toast('ทองไม่พอ!');return;}G.gold-=choice.cost;doHealOutsideBattle(50);toast('ฟื้น 50 HP!');}
-  if(ef==='buyRare'){if(G.gold<choice.cost){toast('ทองไม่พอ!');return;}G.gold-=choice.cost;const rPool=getRarityPool('r');const c={...rPool[Math.floor(Math.random()*rPool.length)]};G.deck.push(c);toast(`ได้การ์ด: ${c.name}!`);}
+  if(ef==='buyRare'){if(G.gold<choice.cost){toast('ทองไม่พอ!');return;}G.gold-=choice.cost;const rPool=getRarityPool('r');const c={...pickFromPool(rPool)};G.deck.push(c);toast(`ได้การ์ด: ${c.name}!`);}
   if(ef==='sacHpRelic'){if(G.player.hp<=20){toast('HP ไม่พอ!');return;}G.player.hp-=20;giveSkillPoint(1);}
   if(ef==='sacCardGold'){showSacCard();}
-  if(ef==='drawCard'){const uPool=getRarityPool('u');const c1={...uPool[Math.floor(Math.random()*uPool.length)]};const c2={...uPool[Math.floor(Math.random()*uPool.length)]};G.deck.push(c1,c2);toast(`ได้ ${c1.name} + ${c2.name}!`);}
+  if(ef==='drawCard'){const uPool=getRarityPool('u');const c1={...pickFromPool(uPool)};const c2={...pickFromPool(uPool)};G.deck.push(c1,c2);toast(`ได้ ${c1.name} + ${c2.name}!`);}
   if(ef==='studyBook'){G.player.hp=Math.max(1,G.player.hp-10);giveSkillPoint(1);}
   if(ef==='fullHeal'){G.player.hp=G.player.maxHp;toast('ฟื้น HP เต็ม!');}
   if(ef==='removeDebuff'){G.deck=G.deck.filter(c=>c.type!=='curse');toast('ลบ Curse ทั้งหมดแล้ว!');}
@@ -2914,7 +3132,7 @@ function showShop(){
   const vipDiscount=hasRelic('vipMember')?1-0.1*hasRelic('vipMember'):1;
   for(let i=0;i<4;i++){
     const pool=Math.random()<0.08?getRarityPool('r'):Math.random()<0.35?getRarityPool('u'):getRarityPool('c');
-    const card={...pool[Math.floor(Math.random()*pool.length)]};
+    const card={...pickFromPool(pool)};
     card.price=Math.floor({c:40,u:75,r:140}[card.rarity]*vipDiscount);card.sold=false;stock.push(card);
   }
   G.shopStock=stock; renderShop();showSc('sc-shop');
@@ -2962,7 +3180,6 @@ function renderShop(){
     ug.appendChild(wrap);
   });
   
-  // 🛠️ ส่วนนี้คือส่วนของการลบการ์ดที่หายไปครับ นำกลับมาใส่ให้ครบแล้ว
   const rm=document.getElementById('sh-remove');rm.innerHTML='';
   G.deck.slice(0,8).forEach(card=>{
     const w=document.createElement('div');w.className='sw';const el=cardEl(card);
@@ -3018,7 +3235,23 @@ function buyHeal(){
   renderShop(); toast(`❤️ ฟื้น 10 HP! (ตอนนี้ ${G.player.hp}/${G.player.maxHp})`);
 }
 
-function showRest(){document.getElementById('rest-select-area').style.display='none';document.getElementById('rest-actions').style.display='flex';showSc('sc-rest');}
+function showRest(){
+  document.getElementById('rest-select-area').style.display='none';
+  document.getElementById('rest-actions').style.display='flex';
+  // แสดงจำนวนคู่ที่ผสมได้บนปุ่ม Fusion ตั้งแต่เข้าที่พัก (ก่อนกดเข้าไป)
+  const pairs=countFusablePairs();
+  const fuseBtn=document.getElementById('rest-fuse-btn');
+  if(fuseBtn){
+    if(pairs>0){
+      fuseBtn.innerHTML=`⚗️ Fusion การ์ด <span style="background:#ffd700;color:#1a0800;border-radius:8px;padding:0 7px;font-size:.85em;font-weight:700;margin-left:2px">ผสมได้ ${pairs} คู่!</span>`;
+      fuseBtn.classList.remove('btn-dim');fuseBtn.classList.add('btn-gold');
+    }else{
+      fuseBtn.innerHTML=`⚗️ Fusion การ์ด <span style="opacity:.6;font-size:.82em">(ไม่มีคู่ที่ผสมได้)</span>`;
+      fuseBtn.classList.add('btn-dim');fuseBtn.classList.remove('btn-gold');
+    }
+  }
+  showSc('sc-rest');
+}
 let fuseCard1=null,fuseCard1Idx=-1;
 function countFusablePairs(){
   const used=new Set();let count=0;
@@ -3165,11 +3398,10 @@ function renderSongbookModal(){
   const list=document.getElementById('songbook-list');list.innerHTML='';
   const note=document.createElement('div');
   note.style.cssText='color:#ffd700;font-size:.74em;text-align:center;margin-bottom:8px;line-height:1.5';
-  note.innerHTML='🎵 เล่นการ์ดให้ <b>ธาตุตรงตามลำดับ</b> 3 ใบติดกัน เพลงจะทริกเกอร์<br><span style="color:#9070c8">ใช้การ์ดใบไหนก็ได้ ขอแค่ธาตุถูกลำดับ!</span>';
+  note.innerHTML='🎵 เล่นการ์ดให้ <b>โน้ตตรงตามลำดับ</b> 3 ใบติดกัน เพลงจะทริกเกอร์<br><span style="color:#9070c8">โด🔥 · เร🧊 · มี⚡ · ฟา⚔️ — ใช้การ์ดใบไหนก็ได้ ขอแค่โน้ตถูกลำดับ</span><br><span style="color:#ffd27a;font-size:.92em">⭐ เล่นครบ 3 โน้ตใน<b>เทิร์นเดียว</b> = พลังเต็ม · ข้ามเทิร์น = 70%</span>';
   list.appendChild(note);
   SONGBOOK.forEach(song=>{
-    const elIc={fire:'🔥',ice:'🧊',lightning:'⚡',physical:'⚔️'};
-    const noteRow=song.notes.map(n=>`<span class="recipe-mat">${elIc[n]} ${ELEMENT_TH[n]}</span>`).join('<span style="color:#9070c8">→</span>');
+    const noteRow=song.notes.map(n=>{const m=NOTE_MAP[n];return `<span class="recipe-mat" style="border-color:${m.color}">${m.icon} ${m.note}</span>`;}).join('<span style="color:#9070c8">→</span>');
     const d=document.createElement('div');d.className='recipe-row'; d.style.cssText='flex-direction:column;align-items:flex-start;gap:6px';
     d.innerHTML=`<div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap">${noteRow}</div><div class="recipe-result" style="width:100%;box-sizing:border-box">${song.icon} ${song.name}<div style="font-size:.85em;color:#88cc88;font-weight:normal">${song.desc}</div></div>`;
     list.appendChild(d);
@@ -3283,7 +3515,8 @@ function computeDailyInfo(){
 }
 function showDailyPreview(){
   const info=computeDailyInfo();
-  document.getElementById('daily-date').textContent=`🗓️ ${todayStr()}  ·  Seed #${info.seed}`;
+  const pd=periodDates();
+  document.getElementById('daily-date').textContent=`🗓️ ${pd.start} ถึง ${pd.end}  ·  Seed #${info.seed}`;
   const c=info.cls;
   const nodeIcon={event:'🌟 Event',shop:'🏪 Shop',rest:'🏕️ ที่พัก',treasure:'💰 สมบัติ',elite:'💀 Elite'};
   let nodeRows='';
@@ -3309,7 +3542,7 @@ function showDailyPreview(){
   showSc('sc-daily');
 }
 function hasPlayedDailyToday(){
-  try{const lb=JSON.parse(localStorage.getItem('ct_lb2')||'[]');return lb.some(r=>r.daily&&r.dailyDate===todayStr());}catch(e){return false;}
+  try{const lb=JSON.parse(localStorage.getItem('ct_lb2')||'[]');return lb.some(r=>r.daily&&r.dailyDate===periodKey());}catch(e){return false;}
 }
 function startDailyRun(){
   const nameInput=document.getElementById('daily-name-input');
@@ -3320,9 +3553,9 @@ function startDailyRun(){
   const clsIdx=Math.floor(_mulberry32()*CLASSES.length);
   _seedState=dateSeed();
   initG(CLASSES[clsIdx],playerName);
-  G.daily=true;G.dailyDate=todayStr();
+  G.daily=true;G.dailyDate=periodKey();
   G.pendingPacks=4;G.totalPacksBatch=4;G.afterPack=null;
-  toast(`📅 Daily ${todayStr()} — Class: ${CLASSES[clsIdx].name}`);
+  toast(`📅 Daily Challenge — Class: ${CLASSES[clsIdx].name}`);
   openNextPack();
 }
 tap(document.getElementById('lb-tab-daily'),()=>setLBMode('daily'));
@@ -3374,6 +3607,14 @@ document.addEventListener('click',e=>{const chip=e.target.closest('[data-stip]')
 renderRecipeModal();
 updateLB();
 refreshResumeBtn();
+
+// แสดง "วิธีเล่น" อัตโนมัติสำหรับผู้เล่นครั้งแรก
+try{
+  if(!localStorage.getItem('ct_seen_howto')){
+    localStorage.setItem('ct_seen_howto','1');
+    setTimeout(()=>{document.getElementById('howto-modal').classList.add('open');},400);
+  }
+}catch(e){}
 </script>
 </body>
 </html>
